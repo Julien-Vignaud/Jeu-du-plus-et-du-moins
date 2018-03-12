@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="main.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Jeu du "plus ou moins"</title>
+</head>
+   <body>
+
+        <script type="text/javascript">
+
+            function nb_aleatoire(min, max)
+            {
+                 var nb = min + (max-min+1)*Math.random();
+                 return Math.floor(nb);
+            }
+            function PoM_manche(min, max)
+            {
+                 var nb = nb_aleatoire(min, max);
+                 var cpt = 0;    
+                 var saisie;     
+                var msg = 'Le nombre supposer est compris entre ' + min + ' et ' + max + '.';
+        do
+        {
+        saisie = prompt(msg);
+            if(saisie == null)
+            return 0;
+        cpt++;
+            if(saisie > nb)
+        msg = "Moins";
+            else
+        msg = "Plus";
+        }
+            while(saisie != nb);
+            return cpt;
+        }
+        function POM_partie(min, max)
+        {
+        var cpt = 0;   
+        var best_score = 0;     
+        var score;    
+        var continuer;
+        do
+        {
+        score = PoM_manche(min, max);   
+        if(score)
+        {
+        cpt++;
+        if(score < best_score || best_score == 0)
+        best_score = score;
+        continuer = confirm("Super, tu as gagne en " + score + " coups.\nVeux-tu rejouer ?");
+                }
+                    else
+                    continuer = false;
+                }
+        while(continuer);
+        alert("Tu as joue " + cpt + " manche(s).\nTon meilleur score est de " + best_score + " coups.");
+        return best_score;}
+
+        </script>
+        <div class= "col-12 text-center">
+<h1>Let's go ?</h1>
+   <button type="button" class="btn btn-danger" href="#" onclick="POM_partie(1,100)">Play</button>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
